@@ -6,10 +6,10 @@ import App from './App'
 import router from './router'
 import VueNativeSock from 'vue-native-websocket'
 
-Vue.use(VueNativeSock, 'ws://localhost:1337')
+Vue.use(VueNativeSock, 'ws://localhost:1337',{ format: 'json' })
 Vue.config.productionTip = false
 
-// Vue.use(VueNativeSock, 'ws://localhost:1337', { protocol: 'message' })
+// Vue.use(VueNativeSock, 'ws://localhost:1337', { protocol: 'newMsg' })
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

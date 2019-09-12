@@ -2,43 +2,61 @@
 <template>
   <div class="hello">
 
-    <button @click="clickButton">Connect</button>
-    {{ status }}
-    <button @click="clickButton2">Connect</button>
-    {{ status }}
+    <button @click="setNameBtn">Connect</button>
+    <input v-model="name" placeholder="Enter name">
+    <div style="">
+      <ul id="example-1">
+        <li v-for="message in messages" >
+          {{ message }}
+        </li>
+      </ul>
+    </div>
+    <button @click="sendBtn">Send</button>
+    <input v-model="newMsg" placeholder="...">
   </div>
 </template>
 
 <script>
-/* eslint-disable */
-    export default {
-        name: 'HelloWorld',
-        data() {
-            return {
-                msg: 'Welcome to Your Vue.js App'
-            }
-        },
-        methods: {
-            clickButton: function () {
-                var msg = {
-                    type: 'message',
-                    date: Date.now()
-                };
-                this.$socket.sendObj(msg)
+  /* eslint-disable */
+  export default {
+    name: 'HelloWorld',
+    data() {
+      return {
+        name:"",
+        msg: 'Welcome to Your Vue.js App',
+        messages:["fsdfsfsfsfsd","gsgsds","evrsvcvesssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"],
+        newMsg:""
+      }
+    },
+    methods: {
+      setNameBtn: function () {
+        var msg = {
+          content: 'setName',
+          name: this.name
+        };
+        console.log(msg);
+        this.$socket.sendObj(msg)
 
-                // $socket is [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) instance
-                // or with {format: 'json'} enabled
-            },
-            clickButton2: function () {
-                // $socket is [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) instance
-                // this.$socket.send('some data')
-                this.$socket.send({awesome: 'test'})
-                // or with {format: 'json'} enabled
-            }
-
-
-        }
+      },
+      sendBtn: function () {
+        var msg = {
+          content: 'message',
+          name: this.name,
+          message:this.newMsg
+        };
+        console.log(msg);
+        this.$socket.sendObj(msg)
+        this.newMsg=""
+      }
+    },
+    created() {
+      this.$options.sockets.onmessage = (response) => {
+        let object=JSON.parse(response.data)
+        let msg= object.name+": "+object.message
+        this.messages.push(msg)
+      }
     }
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -52,10 +70,7 @@
     padding: 0;
   }
 
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
+
 
   a {
     color: #42b983;
