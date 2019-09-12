@@ -16,5 +16,3 @@
     * Gå in i "World chat"	
     * Skicka meddelandeobjekt till servern (innehållandes nickname och mottagarrum)
     
-    
-		
