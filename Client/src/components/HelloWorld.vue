@@ -1,10 +1,17 @@
 /* eslint-disable */
 <template>
   <div class="hello">
-
     <button @click="setNameBtn">Connect</button>
     <input v-model="name" placeholder="Enter name">
-    <div style="">
+
+    <div>
+      <ul>
+        <li v-for="room in rooms" >
+          <button @click="setRoom(room)">{{ room }}</button>
+        </li>
+      </ul>
+    </div>
+    <div>
       <ul id="example-1">
         <li v-for="message in messages" >
           {{ message }}
@@ -25,7 +32,8 @@
         name:"",
         msg: 'Welcome to Your Vue.js App',
         messages:["fsdfsfsfsfsd","gsgsds","evrsvcvesssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"],
-        newMsg:""
+        newMsg:"",
+        rooms:["worldChat","secondChat"]
       }
     },
     methods: {
@@ -44,9 +52,15 @@
           name: this.name,
           message:this.newMsg
         };
-        console.log(msg);
         this.$socket.sendObj(msg)
         this.newMsg=""
+      },
+      setRoom:function (chatName) {
+        var msg = {
+          content: 'setRoom',
+          roomName: chatName
+        };
+        this.$socket.sendObj(msg)
       }
     },
     created() {
