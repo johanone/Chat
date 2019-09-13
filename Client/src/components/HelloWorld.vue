@@ -60,20 +60,19 @@
         this.newMsg=""
       },
       setRoom:function (chatName) {
-        this.currentRoom=chatName;
         var msg = {
           content: 'setRoom',
           name: this.name,
           newRoom: chatName,
           oldRoom: this.currentRoom
         };
+        this.currentRoom=chatName;
         this.$socket.sendObj(msg)
       }
     },
     created() {
       this.$options.sockets.onmessage = (response) => {
-        console.log(response);
-        console.log(response.data);
+
         var object=JSON.parse(response.data);
 
         if (object.content === 'chatRoomNames'){
