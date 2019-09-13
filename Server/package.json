@@ -9,7 +9,7 @@
     "websocket": "^1.0.29"
   },
   "description": "server",
-  "main": "src/server.js",
+  "main": "src/Server.js",
   "devDependencies": {},
   "author": "jenny johan josef",
   "license": "ISC"

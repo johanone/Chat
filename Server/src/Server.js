@@ -1,4 +1,7 @@
-#!/usr/bin/env node
+
+import User from './User.js';
+import ChatRoom from './ChatRoom.js';
+
 var WebSocketServer = require('websocket').server;
 var http = require('http');
 var server = http.createServer(function(request, response) {
@@ -8,7 +11,7 @@ var server = http.createServer(function(request, response) {
 server.listen(1337, function() { });
 
 // create the server
-wsServer = new WebSocketServer({
+var wsServer = new WebSocketServer({
     httpServer: server
 });
 
