@@ -60,17 +60,22 @@
         this.newMsg=""
       },
       setRoom:function (chatName) {
+        this.currentRoom=chatName;
         var msg = {
           content: 'setRoom',
-          roomName: chatName
+          name: this.name,
+          newRoom: chatName,
+          oldRoom: this.currentRoom
         };
         this.$socket.sendObj(msg)
       }
     },
     created() {
       this.$options.sockets.onmessage = (response) => {
-        let object=JSON.parse(response.data)
-        console.log(object.content);
+        console.log(response);
+        console.log(response.data);
+        var object=JSON.parse(response.data);
+
         if (object.content === 'chatRoomNames'){
           this.rooms = object.roomNamesArray;
           this.currentRoom = object.roomNamesArray[0];
