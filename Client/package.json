@@ -1,8 +1,8 @@
 {
   "name": "chat-client",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "Josef <Josef.NymanMuller@yh.nackademin.se>",
+  "description": "chat client",
+  "author": "Josef, Jenny, Johan",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
