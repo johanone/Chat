@@ -1,6 +1,6 @@
 
-import User from './User.js';
-import ChatRoom from './ChatRoom.js';
+import * as user from '/user.js';
+import Room from '/chatRoom.js';
 
 var WebSocketServer = require('websocket').server;
 var http = require('http');
