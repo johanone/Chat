@@ -13,6 +13,9 @@
     </div>
     <div>
       <ul id="example-1">
+        <li>
+          {{ currentRoom }}
+          </li>
         <li v-for="message in messages" >
           {{ message }}
         </li>
@@ -33,7 +36,8 @@
         msg: 'Welcome to Your Vue.js App',
         messages:["fsdfsfsfsfsd","gsgsds","evrsvcvesssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"],
         newMsg:"",
-        rooms:["worldChat","secondChat"]
+        currentRoom: '',
+        rooms:[]
       }
     },
     methods: {
@@ -42,7 +46,6 @@
           content: 'setName',
           name: this.name
         };
-        console.log(msg);
         this.$socket.sendObj(msg)
 
       },
@@ -50,7 +53,8 @@
         var msg = {
           content: 'message',
           name: this.name,
-          message:this.newMsg
+          message: this.newMsg,
+          room: this.currentRoom
         };
         this.$socket.sendObj(msg)
         this.newMsg=""
@@ -66,8 +70,16 @@
     created() {
       this.$options.sockets.onmessage = (response) => {
         let object=JSON.parse(response.data)
-        let msg= object.name+": "+object.message
-        this.messages.push(msg)
+        console.log(object.content);
+        if (object.content === 'chatRoomNames'){
+          this.rooms = object.roomNamesArray;
+          this.currentRoom = object.roomNamesArray[0];
+        }
+        else {
+          let msg= object.name+": "+object.message
+          this.messages.push(msg)
+        }
+
       }
     }
   }
