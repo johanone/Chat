@@ -34,7 +34,7 @@
       return {
         name:"",
         msg: 'Welcome to Your Vue.js App',
-        messages:["fsdfsfsfsfsd","gsgsds","evrsvcvesssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"],
+        messages:[],
         newMsg:"",
         currentRoom: '',
         rooms:[]
